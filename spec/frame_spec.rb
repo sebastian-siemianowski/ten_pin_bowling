@@ -45,4 +45,9 @@ describe Frame do
     frame.roll_1 = 7
     frame.roll_2 = 4
   end
+
+  it 'enables marking the frame as finalized' do
+    frame.finalized = true
+    expect(frame.finalized).to eq true
+  end
 end

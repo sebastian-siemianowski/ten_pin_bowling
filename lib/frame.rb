@@ -1,5 +1,7 @@
 class Frame
 
+  attr_accessor :finalized
+
   def show_error_message(message)
     puts(message)
   end
