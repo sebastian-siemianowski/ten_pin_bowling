@@ -1,0 +1,38 @@
+## Technical test
+
+### Ten Pin Bowling
+
+Write a web application that lets you â€œplayâ€ ten pin bowling
+
+It should let you choose a number of players (1-4), then and implement the rules of play as
+defined here:
+
+[https://en.wikipedia.org/wiki/Ten-pin_bowling#Rules_of_play](https://en.wikipedia.org/wiki/Ten-pin_bowling#Rules_of_play)
+
+Each frame should:
+
+1. Display the current scores, and the scores of all previous frames
+2. Let each player take the right number of shots
+3. Let you enter the number of pins knocked down in each shot
+
+At the end of the game, it should
+
+1. Display the final scores
+2. Declare the winner
+
+This should not take longer than an hour or two - Weâ€™re primarily looking for clean, well-organised
+code and a sensible approach.
+
+Happy coding!
+
+
+Rules of the game:
+
+Bowling Rules:
+
+10 turns allowed per game.
+2 rolls allowed per turn.
+If bowler fails to knock both down, score for that turn is sum of its rolls rolls.
+Spare: bowler knocks down 10 on roll #2. Score is 10 + next roll score.
+Strike: bowler knocks down 10 on roll #1. Score is 10 + next 2 throw scores.
+Spare or strike on last turn (turn 10), gets 1 or 2 bonus rolls respectively. These bonus rolls count toward the 10th turn.
