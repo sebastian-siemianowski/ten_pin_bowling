@@ -1,12 +1,5 @@
 class ScoreCalculator
   def calculate(options)
-    # frames = options[:frames]
-    # score = 0
-    # frames.each do | frame |
-    #   score += frame.roll_1
-    #   score += frame.roll_2
-    # end
-
     {score: calculate_by_frame(options).values.inject(:+)}
   end
 
