@@ -1,9 +1,10 @@
 class Frame
 
-  attr_accessor :finalized, :bonus
+  attr_accessor :finalized, :bonus , :active
 
   def initialize
     @finalized = false
+    @active = false
   end
 
   def show_error_message(message)

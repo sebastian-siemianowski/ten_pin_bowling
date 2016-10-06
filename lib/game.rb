@@ -9,6 +9,8 @@ class Game
       @frames << Frame.new
     end
 
+    @bonus_frame = Frame.new
+    @bonus_frame.bonus = true
     @current_frame = 1
   end
 
@@ -16,8 +18,26 @@ class Game
     @frames[(frame_number-1)]
   end
 
+  def update_frame(frame_number, frame)
+    @frames[(frame_number-1)] = frame
+  end
+
   def frames
-    @frames
+    active_frames = @frames.select {|frame| frame.active}
+    if bonus_frame.active
+      active_frames << bonus_frame
+      active_frames
+    else
+      active_frames
+    end
+  end
+
+  def bonus_frame
+    @bonus_frame
+  end
+
+  def bonus_frame=(bonus_frame)
+    @bonus_frame = bonus_frame
   end
 
   def next_frame
