@@ -1,6 +1,6 @@
 class Frame
 
-  attr_accessor :finalized, :bonus , :active
+  attr_accessor :finalized, :bonus , :active, :invalid
 
   def initialize
     @finalized = false
@@ -8,6 +8,7 @@ class Frame
   end
 
   def show_error_message(message)
+    @invalid = true
     puts(message)
   end
 

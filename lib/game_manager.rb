@@ -8,9 +8,7 @@ class GameManager
     calculator = ScoreCalculator.new
     games = []
 
-    puts 'Please specify number of players'
-    print '> '
-    number_of_players = gets.chomp.to_i
+    number_of_players = ask_for_number_of_players
 
     number_of_players.times do
       games << Game.new
@@ -22,8 +20,20 @@ class GameManager
       games.each_with_index do | game, index |
         player_number = index + 1
         show_frame_header(current_frame, player_number)
-        roll_1 = ask_for_the_first_roll
-        roll_2 = ask_for_the_second_roll
+
+        invalid = true
+        while invalid
+          roll_1 = ask_for_the_first_roll
+          roll_2 = ask_for_the_second_roll
+          
+          test_frame = Frame.new
+          test_frame.roll_1 = roll_1
+          test_frame.roll_2 = roll_2
+          if !test_frame.invalid
+            invalid = false
+          end
+        end
+
 
         game_frame = update_current_frame(current_frame, game, roll_1, roll_2)
         show_score_for_current_player(calculator, game, player_number)
@@ -37,6 +47,23 @@ class GameManager
 
     display_winner(calculator, games)
 
+  end
+
+  def ask_for_number_of_players
+    invalid = true
+    while invalid
+      puts 'Please specify number of players'
+      print '> '
+      number_of_players = gets.chomp.to_i
+
+      if player_number_whitelist.include? number_of_players
+        invalid = false
+      else
+        puts
+        puts 'Please provide correct number of players'
+        puts
+      end
+    end
   end
 
   def generate_bonus_frame(current_frame, game, game_frame)
@@ -129,14 +156,36 @@ class GameManager
   end
 
   def ask_for_the_second_roll
-    puts 'Please specify number of knocked down pins in the second roll'
-    print '> '
-    gets.chomp.to_i
+    invalid = true
+
+    while invalid
+      puts 'Please specify number of knocked down pins in the second roll'
+      print '> '
+      second_roll = gets.chomp.to_i
+
+      if roll_number_whitelist.include? second_roll
+        invalid = false
+      end
+    end
   end
 
   def ask_for_the_first_roll
-    puts 'Please specify number of knocked down pins in the first roll'
-    print '> '
-    gets.chomp.to_i
+    invalid = true
+    while invalid
+      puts 'Please specify number of knocked down pins in the first roll'
+      print '> '
+      first_roll = gets.chomp.to_i
+      if roll_number_whitelist.include? first_roll
+        invalid = false
+      end
+    end
+  end
+
+  def player_number_whitelist
+    %w(1 2 3 4)
+  end
+
+  def roll_number_whitelist
+    %w(1 2 3 4 5 6 7 8 9 10)
   end
 end
