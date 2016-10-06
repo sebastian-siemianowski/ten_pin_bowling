@@ -1,6 +1,10 @@
 class Frame
 
-  attr_accessor :finalized
+  attr_accessor :finalized, :bonus
+
+  def initialize
+    @finalized = false
+  end
 
   def show_error_message(message)
     puts(message)
@@ -39,7 +43,11 @@ class Frame
   end
 
   def spare?
-    (roll_1 + roll_2) == 10
+    !roll_2.nil? && (roll_1 + roll_2) == 10
+  end
+
+  def miss?
+    (roll_1 + roll_2.to_i) < 10
   end
 
   private
@@ -69,7 +77,7 @@ class Frame
       return {valid: false}
     end
 
-    if (roll_1 + input) > 10
+    if (roll_1 + input) > 10 && !bonus
       show_error_message('Number of pins cannot exceed 10')
       return {valid: false}
     end
