@@ -25,7 +25,7 @@ class GameManager
         while invalid
           roll_1 = ask_for_the_first_roll
           roll_2 = ask_for_the_second_roll
-          
+
           test_frame = Frame.new
           test_frame.roll_1 = roll_1
           test_frame.roll_2 = roll_2
@@ -41,8 +41,9 @@ class GameManager
 
         generate_bonus_frame(current_frame, game, game_frame)
 
-        current_frame += 1
+
       end
+      current_frame += 1
     end
 
     display_winner(calculator, games)
@@ -51,19 +52,22 @@ class GameManager
 
   def ask_for_number_of_players
     invalid = true
+    player_number = nil
     while invalid
       puts 'Please specify number of players'
       print '> '
-      number_of_players = gets.chomp.to_i
-
+      number_of_players = gets.chomp
+      puts player_number_whitelist.include? number_of_players
       if player_number_whitelist.include? number_of_players
         invalid = false
+        player_number = number_of_players.to_i
       else
         puts
         puts 'Please provide correct number of players'
         puts
       end
     end
+    player_number
   end
 
   def generate_bonus_frame(current_frame, game, game_frame)
@@ -161,24 +165,29 @@ class GameManager
     while invalid
       puts 'Please specify number of knocked down pins in the second roll'
       print '> '
-      second_roll = gets.chomp.to_i
+      second_roll = gets.chomp
 
       if roll_number_whitelist.include? second_roll
         invalid = false
       end
     end
+
+    second_roll.to_i
   end
 
   def ask_for_the_first_roll
     invalid = true
+    first_roll = nil
     while invalid
       puts 'Please specify number of knocked down pins in the first roll'
       print '> '
-      first_roll = gets.chomp.to_i
+      first_roll = gets.chomp
       if roll_number_whitelist.include? first_roll
         invalid = false
       end
     end
+
+    first_roll.to_i
   end
 
   def player_number_whitelist
@@ -186,6 +195,6 @@ class GameManager
   end
 
   def roll_number_whitelist
-    %w(1 2 3 4 5 6 7 8 9 10)
+    %w(0 1 2 3 4 5 6 7 8 9 10)
   end
 end
